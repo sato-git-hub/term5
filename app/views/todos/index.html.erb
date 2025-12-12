@@ -1,0 +1,24 @@
+<h1>Todo List</h1>
+
+<%= link_to 'New Task', new_todo_path, class: 'new-task' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>タスク</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @todos.each do |todo| %>
+    <tr>
+      <td><%= todo.title %></td>
+      <td>
+        <%= link_to 'Edit', edit_todo_path(todo), class: 'edit' %>
+        <%= link_to 'Delete', todo_path(todo), method: :delete, class: "delete", data: { turbo_confirm:'Are you sure?', turbo_method: :delete} %>
+
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
