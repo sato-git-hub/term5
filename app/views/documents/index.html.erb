@@ -3,9 +3,10 @@
     <div class="container">
       <h1 class="logo-font">conduit</h1>
       <p>A place to share your knowledge.</p>
+      <!--link_to(リンクの文字列, URL, オプション)-->
+      <%=link_to "Logout", logout_path, class: "logout", data: { turbo_method: :delete }%>
     </div>
   </div>
-
   <div class="container page">
     <div class="row">
       <div class="col-md-9">
@@ -93,14 +94,10 @@
           </a>
         </div>
         <% end %>
-
-
       </div>
-
       <div class="col-md-3">
         <div class="sidebar">
           <p>Popular Tags</p>
-
           <div class="tag-list">
             <a href="" class="tag-pill tag-default">programming</a>
             <a href="" class="tag-pill tag-default">javascript</a>

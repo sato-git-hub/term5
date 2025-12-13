@@ -18,12 +18,19 @@
   <!--application.css-->
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <link rel="stylesheet" href="//demo.productionready.io/main.css">
+  <!--Turbo Drive / Turbo Frames / Turbo Streams全て有効-->
   <%= javascript_importmap_tags %>
 
 </head>
 
 <body>
   <%= yield %>
+
+  <%= turbo_stream_from "flash" %>
+  <div id="flash">
+    <%= render "shared/flash" %>
+  </div>
+
 </body>
 
 </html>

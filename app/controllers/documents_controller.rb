@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-
+before_action :login?
   def index
     if params[:feed] == "your"
       @documents = Document.limit(2).order(created_at: :desc)
@@ -29,8 +29,14 @@ class DocumentsController < ApplicationController
   end
 
   def edit
+  
     @document = Document.find(params[:id])
-   
+    unless current_user.id == @document.user_id
+      flash[:alert] = "編集権限がありません"
+      redirect_to documents_path
+      return
+    end
+    
   end
 
   def update
@@ -44,6 +50,12 @@ class DocumentsController < ApplicationController
 
   def destroy
     @document = Document.find(params[:id])
+    unless current_user.id == @document.user_id
+      flash[:alert] = "削除権限がありません"
+      redirect_to documents_path
+      
+      return
+    end
     @document.destroy
     redirect_to documents_path
   end
