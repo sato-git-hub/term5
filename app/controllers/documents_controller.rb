@@ -34,7 +34,6 @@ before_action :set_document, only: [:edit, :update, :destroy, :show]
       redirect_to documents_path(feed: "global")
       return
     end
-    
   end
 
   def update

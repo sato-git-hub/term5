@@ -1,11 +1,11 @@
 <div class="article-page">
   <div class="banner">
     <div class="container">
-      <h1><%=@document.title%></h1>
+      <h1><%= @document.title %></h1>
       <div class="article-meta">
-        <%=link_to "Edit Article", edit_document_path(@document.id), class: "btn btn-sm btn-outline-secondary"%>
+        <%= link_to "Edit Article", edit_document_path(@document.id), class: "btn btn-sm btn-outline-secondary" %>
         <i class="ion-edit"></i>
-        <%=link_to "Delete Article", document_path(@document.id), class: "btn btn-sm btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }%>
+        <%= link_to "Delete Article", document_path(@document.id), class: "btn btn-sm btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
         <i class="ion-trash-a"></i>
       </div>
     </div>
@@ -14,13 +14,13 @@
     <div class="row article-content">
       <div class="col-md-12">
         <p>
-          <%=@document.article_about%>
+          ユーザーNo: <%= @document.user_id %>
         </p>
         <h2 id="introducing-ionic">
-          <%=@document.article%></h2>
-        <p><%=@document.article%></p>
+          <%= @document.article %></h2>
+        <p><%= @document.article_about %></p>
         <ul class="tag-list">
-          <li class="tag-default tag-pill tag-outline"><%=@document.article_tag%></li>
+          <li class="tag-default tag-pill tag-outline"><%= @document.article_tag %></li>
         </ul>
       </div>
     </div>
