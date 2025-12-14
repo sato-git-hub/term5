@@ -7,15 +7,15 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      #user.idをいれる
+      # user.idをいれる
       session[:user_id] = user.id
-      redirect_to documents_path 
-    else 
+      redirect_to documents_path(feed: "global")
+    else
       render :new, status: :unprocessable_entity
     end
   end
 
-  private 
+  private
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end

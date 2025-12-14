@@ -2,17 +2,14 @@
   <div class="banner">
     <div class="container">
       <h1><%=@document.title%></h1>
-
       <div class="article-meta">
         <%=link_to "Edit Article", edit_document_path(@document.id), class: "btn btn-sm btn-outline-secondary"%>
         <i class="ion-edit"></i>
         <%=link_to "Delete Article", document_path(@document.id), class: "btn btn-sm btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }%>
         <i class="ion-trash-a"></i>
-
       </div>
     </div>
   </div>
-
   <div class="container page">
     <div class="row article-content">
       <div class="col-md-12">
