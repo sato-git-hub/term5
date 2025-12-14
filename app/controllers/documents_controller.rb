@@ -1,18 +1,18 @@
 class DocumentsController < ApplicationController
-
+before_action :login?
+before_action :set_document, only: [:edit, :update, :destroy, :show]
   def index
+    page = params[:page].to_i == 2 ? params[:page].to_i : 1
+    offset = (page - 1) * 5
+
     if params[:feed] == "your"
-      @documents = Document.limit(2).order(created_at: :desc)
-    elsif params[:feed] == "global"
-    elsif params[:page] == "1"
-      @documents = Document.limit(2).order(created_at: :desc)
-    elsif params[:page] == "2"
-      @documents = Document.limit(2).offset(2).order(created_at: :desc)
+      @documents = current_user.documents.order(created_at: :desc).offset(offset).limit(5)
+    else
+      @documents = Document.order(created_at: :desc).offset(offset).limit(5)
     end
   end
 
   def show
-    @document = Document.find(params[:id])
   end
 
   def new
@@ -20,35 +20,44 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = Document.new(document_params)
+    @document = current_user.documents.build(document_params)
     if @document.save
-      redirect_to documents_path
+      redirect_to documents_path(feed: "global")
     else
       render :new
     end
   end
 
   def edit
-    @document = Document.find(params[:id])
-   
+    unless current_user.id == @document.user_id
+      flash[:alert] = "編集権限がありません"
+      redirect_to documents_path(feed: "global")
+      return
+    end
   end
 
   def update
-    @document = Document.find(params[:id])
     if @document.update(document_params)
-      redirect_to documents_path
+      redirect_to documents_path(feed: "global")
     else
       render :edit
     end
   end
 
   def destroy
-    @document = Document.find(params[:id])
+    unless current_user.id == @document.user_id
+      flash[:alert] = "削除権限がありません"
+      redirect_to documents_path(feed: "global")
+      return
+    end
     @document.destroy
-    redirect_to documents_path
+    redirect_to documents_path(feed: "global")
   end
 
 private
+  def set_document
+    @document = Document.find(params[:id])
+  end
 
   def document_params
     params.require(:document).permit(

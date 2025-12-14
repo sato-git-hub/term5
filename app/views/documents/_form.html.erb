@@ -6,7 +6,7 @@
           <li>That title is required</li>
         </ul>
 
-        <%=form_with model:@document do |f|%>
+        <%= form_with model:@document do |f| %>
         <fieldset>
           <fieldset class="form-group">
             <%= f.text_field :title, class: "form-control form-control-lg", placeholder: "Article Title"%>
@@ -15,10 +15,10 @@
             <%= f.text_field :article_about, class: "form-control", placeholder: "What's this article about?"%>
           </fieldset>
           <fieldset class="form-group">
-            <%= f.text_area :article, class: "form-control", rows: "8", placeholder: "Write your article (in markdown)"%>
+            <%= f.text_area :article, class: "form-control", rows: "8", placeholder: "Write your article (in markdown)" %>
           </fieldset>
           <fieldset class="form-group">
-            <%= f.text_area :article_tag, class: "form-control", placeholder: "Enter tags"%>
+            <%= f.text_area :article_tag, class: "form-control", placeholder: "Enter tags" %>
             <div class="tag-list">
               <span class="tag-default tag-pill"> <i class="ion-close-round"></i> tag </span>
             </div>

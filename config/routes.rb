@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-
-get "todos/index"
-root "homes#top"
-resources :users, only: [:new, :create, :show]
-
+root "documents#index"
+resources :documents
+resources :users, only: [ :new, :create, :show ]
+get "login", to: "sessions#new"
+post "login", to: "sessions#create"
+delete "logout", to: "sessions#destroy"
 end

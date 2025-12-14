@@ -1,1 +1,4 @@
-<%= render partial: "sign_form", locals: {document: "sign in"} %>
+<%=form_with url: login_path, method: :post, local: true, data: { turbo: false }  do |f| %>
+<%= render partial: "shared/form", locals: {document: "Log in", f: f} %>
+<%= link_to "Sign up",new_user_path%>
+<% end %>
