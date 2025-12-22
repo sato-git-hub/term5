@@ -1,9 +1,13 @@
 class DocumentsController < ApplicationController
 before_action :login?
-before_action :set_document, only: [:edit, :update, :destroy, :show]
-  def index
-    page = params[:page].to_i == 2 ? params[:page].to_i : 1
-    offset = (page - 1) * 5
+before_action :set_document, only: [ :edit, :update, :destroy, :show ]
+
+FIRST_PAGE = 1
+PER_PAGE = 5
+def index
+    # documents_path(feed: params[:feed], page: 1)のpageの値またはnilの時は1
+    page = params[:page].to_i.presence || FIRST_PAGE
+    offset = (page - 1) * PER_PAGE
 
     if params[:feed] == "your"
       @documents = current_user.documents.order(created_at: :desc).offset(offset).limit(5)
@@ -67,5 +71,4 @@ private
     :article_tag
     )
   end
-
 end
