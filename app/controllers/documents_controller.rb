@@ -1,11 +1,10 @@
 class DocumentsController < ApplicationController
 before_action :login?
-before_action :set_document, only: [:edit, :update, :destroy, :show]
+before_action :set_document, only: [ :edit, :update, :destroy, :show ]
 
 FIRST_PAGE = 1
 PER_PAGE = 5
-def index
-    
+def index    
     # documents_path(feed: params[:feed], page: 1)のpageの値またはnilの時は1
     page = params[:page].to_i.presence || FIRST_PAGE
     offset = (page - 1) * PER_PAGE
